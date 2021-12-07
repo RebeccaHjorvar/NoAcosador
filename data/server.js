@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Router = require('./routes');
+// const Router = require('../Routes');
 
 const app = express();
 
@@ -13,7 +13,7 @@ mongoose.connect(
     `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}`, 
     {
         useNewUrlParser: true,
-        useFindAndModify: false,
+        //useFindAndModify: false,
         useUnifiedTopology: true
     }
 );
@@ -24,7 +24,7 @@ db.once('open', () => {
     console.log('Successfully connected');
 });
 
-app.use(Router);
-app.listen(3000, () => {
-    console.log('Server is running at port 3000');
-});
+// app.use(Router);
+// app.listen(3000, () => {
+//     console.log('Server is running at port 3000');
+// });
