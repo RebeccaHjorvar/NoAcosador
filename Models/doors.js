@@ -4,8 +4,7 @@ const Doorschema = mongoose.Schema({
     doorName = String,
     location = String,
     events: [{
-        type: mongoose.Schema.Types.ObjectId,
-        require: true
+        type: mongoose.Schema.Types.ObjectId
     }] 
 })
 
