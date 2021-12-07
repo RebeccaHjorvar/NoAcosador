@@ -18,4 +18,4 @@ const TenantSchema = new mongoose.Schema({
     tag: {tagSchema}
 });
 
-const Tenant = mongoose.model("Tenant", TenantSchema);
+module.exports = mongoose.model("Tenant", TenantSchema);
