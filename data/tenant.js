@@ -15,11 +15,7 @@ const TenantSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    tag: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Tag',
-        requried: true
-    }
+    tag: {tagSchema}
 });
 
 const Tenant = mongoose.model("Tenant", TenantSchema);
