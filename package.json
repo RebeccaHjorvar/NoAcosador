@@ -12,5 +12,12 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^4.2.1",
+    "mongoose": "^6.0.15",
+    "node": "^17.2.0",
+    "nodemon": "^2.0.15"
+  }
 }
