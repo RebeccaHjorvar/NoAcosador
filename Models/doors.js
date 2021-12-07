@@ -2,7 +2,11 @@ const mongoose = require("mongoose")
 
 const Doorschema = mongoose.Schema({
     doorName = String,
-    location = String	
+    location = String,
+    events: [{
+        type: mongoose.Schema.Types.ObjectId,
+        require: true
+    }] 
 })
 
-module.exports = mongoose.model("Door", Doorschema)
+module.exports = mongoose.model("door", Doorschema)
