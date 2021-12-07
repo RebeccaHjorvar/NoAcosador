@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+// Tenantschema and model
+
 const TenantSchema = new mongoose.Schema({
     firstName: {
         type: String,
@@ -14,9 +16,10 @@ const TenantSchema = new mongoose.Schema({
         required: true
     },
     tag: {
-        type: TagSchema,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Tag',
         requried: true
     }
-})
+});
 
 const Tenant = mongoose.model("Tenant", TenantSchema);
