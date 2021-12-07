@@ -6,11 +6,11 @@ const app = express();
 
 app.use(express.json());
 
-const username = '', password = '', cluster = '', dbname = '';
+const username = 'user', password = '1234', cluster = 'noacosador.sszic', dbname = 'test';
 
 // insert cluster url below
 mongoose.connect(
-    'mongodb+srv://Rebecca:1234@noacosador.sszic.mongodb.net/test', 
+    `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}`, 
     {
         useNewUrlParser: true,
         useFindAndModify: false,
