@@ -2,8 +2,12 @@ const mongoose = require("mongoose")
 
 
 const Doorschema = mongoose.Schema({
-    doorName = String,
-    location = String,
+    doorName: {
+        type: String
+    },
+    location: {
+        type: String
+    },
     events: [eventSchema] 
 })
 
