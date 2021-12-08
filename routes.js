@@ -1,10 +1,17 @@
-
-'use strict';
-
 module.exports = (app) => {
-  const tenantList = require('./routes/tenant')
+    const doorList = require('../controllers/doorController');
 
-  app.route('/tenant')
-  .get(tenantList.createTenant)
-  .post(tenantList.createTenant);
+
+app.route('/Door')
+.get(doorList.getAllDoors)
+.post(doorList.createDoor)
+
+app.route('/door/:id')
+.get(doorList.findDoorById)
+.put(doorList.updateDoor)
+.delete(doorList.deleteDoor)
 };
+
+
+
+
