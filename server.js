@@ -17,6 +17,8 @@ mongoose
         const app = express();
         app.use(express.json());
         app.use("/api", routes)
+        app.listen(3000, () => {
+            console.log('Server is running at port 3000'})
     });
 
 const db = mongoose.connection;
@@ -25,7 +27,7 @@ db.once('open', () => {
     console.log('Successfully connected');
 });
 
-// app.use(Router);
-// app.listen(3000, () => {
-//     console.log('Server is running at port 3000');
-// });
+app.use(routes);
+app.listen(3000, () => {
+    console.log('Server is running at port 3000');
+});
