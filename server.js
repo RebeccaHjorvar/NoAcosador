@@ -7,7 +7,7 @@ port = process.env.PORT || 3000
 Tenant = require('./api/models/tenantModel')
 
 //db url
-const username = 'user', password = '1234', cluster = 'noacosador.sszic', dbname = 'test';
+const username = 'user', password = '1234', cluster = 'noacosador.sszic', dbname = 'NoAcosador';
 const uri = `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}`
 
 // moongose connection
