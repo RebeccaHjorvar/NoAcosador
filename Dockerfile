@@ -1,23 +1,19 @@
-FROM node:17
+FROM node:8.11-slim
 
-# Create app directory
-
+RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-# Install app dependencies
+# copying all the files from your file system to container file system
+COPY package.json .
 
-COPY package*.json ./
-
+# install all dependencies
 RUN npm install
 
-# If you are building your code for production
+# copy oter files as well
+COPY ./ .
 
-# RUN npm ci --only=production
-
-# Bundle app source
-
-COPY . .
-
+#expose the port
 EXPOSE 3000
 
-CMD [ "node", "server.js" ]
+# command to run when intantiate an image
+CMD ["npm","start"]
