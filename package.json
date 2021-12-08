@@ -1,0 +1,23 @@
+{
+  "name": "noacosador",
+  "version": "1.0.0",
+  "description": "TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project.",
+  "main": "Index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://HAK-DreamTeam@dev.azure.com/HAK-DreamTeam/NoAcosador/_git/NoAcosador"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^4.2.1",
+    "mongoose": "^6.0.15",
+    "node": "^17.2.0",
+    "nodemon": "^2.0.15"
+  }
+}
