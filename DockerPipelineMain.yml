@@ -13,7 +13,7 @@ variables:
   dockerRegistryServiceConnection: '1495ce24-ed2e-4550-a0b7-6f77e494c5f7'
   imageRepository: 'noacosador'
   containerRegistry: 'acosadorapi.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/DockerFile'
+  dockerfilePath: '**/DockerFile'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
