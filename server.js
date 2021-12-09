@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const routes = require('./routes');
+//const routes = require('./routes');
 
 const username = 'user', password = '1234', cluster = 'noacosador.sszic', dbname = 'test';
 
@@ -16,7 +16,11 @@ mongoose
     .then(() => {
         const app = express();
         app.use(express.json());
-        app.use("/api", routes)
+        //app.use("/api", routes)
+        //app.use(routes);
+
+        var port = process.env.PORT || 8000;
+        app.listen(port);
     });
 
 const db = mongoose.connection;
@@ -25,7 +29,4 @@ db.once('open', () => {
     console.log('Successfully connected');
 });
 
- app.use(routes);
 
- var port = process.env.PORT || 3000;
- app.listen(port);
