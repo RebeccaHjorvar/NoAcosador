@@ -7,8 +7,13 @@ const tagSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    //tenant: {tenantSchema},
-    //access: {doorSchema}
+    tenant: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Tenant',
+    },
+    // access: {
+        //type: Boolean
+    // }
 });
 
 module.exports = mongoose.model("Tag", tagSchema)
