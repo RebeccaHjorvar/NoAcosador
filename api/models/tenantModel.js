@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 // Tenantschema and model
-const TenantSchema = new mongoose.Schema({
+const tenantSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: 'Enter first name'
@@ -18,4 +18,4 @@ const TenantSchema = new mongoose.Schema({
     //tag: {tagSchema}
 });
 
-module.exports = mongoose.model("Tenant", TenantSchema);
+module.exports = mongoose.model("Tenant", tenantSchema);

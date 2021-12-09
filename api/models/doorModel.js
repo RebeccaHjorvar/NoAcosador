@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 
-const Doorschema = mongoose.Schema({
+const doorschema = mongoose.Schema({
     doorName: {
         type: String
     },
@@ -11,4 +11,4 @@ const Doorschema = mongoose.Schema({
     //events: [eventSchema] 
 })
 
-module.exports = mongoose.model("Door", Doorschema)
+module.exports = mongoose.model("Door", doorschema)
