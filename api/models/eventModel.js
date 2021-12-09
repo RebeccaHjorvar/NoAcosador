@@ -7,7 +7,7 @@ const eventSchema = mongoose.Schema({
     error: String,
     date: Date,
     tag: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: tagSchema,
         ref: 'Tag'
     }
 });
