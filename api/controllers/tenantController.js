@@ -1,7 +1,5 @@
 'use strict';
-
-const tagModel = require('../models/tagModel');
-
+g
 const mongoose = require('mongoose'),
     Tenant = mongoose.model('Tenant');
 
