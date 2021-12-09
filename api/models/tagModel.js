@@ -7,14 +7,8 @@ const tagSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    tenant: {
-        type: mongoose.Types.ObjectId,
-        ref: 'Tenant',
-    },
-    access: [{
-        type: mongoose.Types.ObjectId,
-        ref: 'Door'
-    }]
+    tenant: [tenantSchema],
+    access: [doorSchema]
 });
 
 module.exports = mongoose.model("Tag", tagSchema)

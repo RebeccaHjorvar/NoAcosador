@@ -15,10 +15,7 @@ const TenantSchema = new mongoose.Schema({
         type: Number,
         required: 'Enter the appartment number'
     },
-    tag: {
-        type: mongoose.Types.ObjectId,
-        ref: 'Tag'
-    }
+    //tag: {tagSchema}
 });
 
 module.exports = mongoose.model("Tenant", TenantSchema);
