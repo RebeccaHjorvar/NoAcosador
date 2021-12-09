@@ -7,6 +7,7 @@ const port = process.env.PORT || '3000';
 Tenant = require('./api/models/tenantModel')
 Tag = require('./api/models/tagModel')
 Door = require('./api/models/doorModel')
+Events = require('./api/models/eventModel') // Event is a default so named it Events
 
 //db url
 const username = 'user', password = '1234', cluster = 'noacosador.sszic', dbname = 'NoAcosador';
