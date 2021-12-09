@@ -10,10 +10,10 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '1495ce24-ed2e-4550-a0b7-6f77e494c5f7'
+  dockerRegistryServiceConnection: '934a7050-3a3e-4914-a6ec-735906364c24'
   imageRepository: 'noacosador'
   containerRegistry: 'acosadorapi.azurecr.io'
-  dockerfilePath: '**/Dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
