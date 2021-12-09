@@ -6,7 +6,10 @@ const eventSchema = mongoose.Schema({
     out: Boolean,
     error: String,
     date: Date,
-    tag: tagSchema
-})
+    tag: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Tag'
+    }
+});
 
 module.exports = mongoose.model("event", eventSchema)
