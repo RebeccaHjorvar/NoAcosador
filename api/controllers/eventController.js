@@ -1,5 +1,3 @@
-const { send } = require('process');
-
 const mongoose = require('mongoose'),
     Event = mongoose.model('Event');
 
