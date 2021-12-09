@@ -19,8 +19,10 @@ const eventSchema = mongoose.Schema({
     {
         type: Date
     },
-    tag: 
-    {tagSchema}
+    tag: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Tag'
+    }
 })
 
-module.exports = mongoose.model("event", eventSchema)
+module.exports = mongoose.model("Event", eventSchema)

@@ -8,7 +8,10 @@ const doorschema = mongoose.Schema({
     location: {
         type: String
     },
-    //events: [eventSchema] 
+    events: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Event',
+    }]
 })
 
 module.exports = mongoose.model("Door", doorschema)
