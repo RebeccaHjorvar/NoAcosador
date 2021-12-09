@@ -3,7 +3,7 @@ const mongoose = require('mongoose'),
 
 
 // Create event
-exports.create_a_event = (req, res) => {
+exports.create_an_event = (req, res) => {
     let new_event = new Event(req.body);
     new_event.save((err, event) => {
         if (err)
