@@ -1,5 +1,4 @@
 'use strict';
-g
 const mongoose = require('mongoose'),
     Tenant = mongoose.model('Tenant');
 

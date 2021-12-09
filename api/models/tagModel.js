@@ -11,9 +11,10 @@ const tagSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'Tenant',
     },
-    // access: {
-        //type: Boolean
-    // }
+    access: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Door'
+    }]
 });
 
 module.exports = mongoose.model("Tag", tagSchema)
