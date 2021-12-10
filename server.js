@@ -9,7 +9,6 @@ Tag = require('./api/models/tagModel')
 Door = require('./api/models/doorModel')
 Events = require('./api/models/eventModel') // Event is a default so named it Events
 
-AdminLog = require('./api/models/adminLogModel')
 
 //db url
 const username = 'user', password = '1234', cluster = 'noacosador.sszic', dbname = 'NoAcosador';
@@ -38,15 +37,11 @@ const tagRoute = require('./api/routes/tagRoutes');
 const doorRoute = require('./api/routes/doorRoutes');
 const eventRoute = require('./api/routes/eventRoutes');
 
-const adminLogRoute = require('./api/routes/adminLogRoutes')
-
 // Register routes
 tenantRoute(app);
 tagRoute(app);
 doorRoute(app);
 eventRoute(app);
-
-adminLogRoute(app);
 
 app.get('*', (req, res)=>{
     res.status(404).send({url: req.originalUrl + ' not found'})
