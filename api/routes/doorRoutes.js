@@ -1,7 +1,7 @@
 module.exports = (app) => {
     const door = require('../controllers/doorController');
 
-app.route('/Door')
+app.route('/door')
 .get(door.getAllDoors)
 .post(door.createDoor)
 
