@@ -39,7 +39,7 @@ exports.mapAdminLog = (date, appartment, eventName, tagNumber) => {
             in: DÖIN,
             ut: DÖUT,
             error: `${theError}`,
-            tag: theTag
+            tag: theTag._id
         })
     });
 
