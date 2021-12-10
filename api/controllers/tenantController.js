@@ -1,5 +1,4 @@
 'use strict';
-
 const mongoose = require('mongoose'),
     Tenant = mongoose.model('Tenant');
 
@@ -45,3 +44,6 @@ exports.list_all_tenants = (req, res) => {
       res.json({ message: 'Tenant successfully deleted' });
     });
   };
+
+
+  
