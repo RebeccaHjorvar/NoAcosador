@@ -1,22 +1,14 @@
 const mongoose = require("mongoose")
 
-
+// model to show the logs to the admin.
 const adminschema = mongoose.Schema({
-    door: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Door'
-    },
     event: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Event'
     },
-    tenant: {
+    door: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Tenant'
-    },
-    tag: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Tag'
+        ref: 'Door'
     }
 })
 

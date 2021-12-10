@@ -1,6 +1,8 @@
 module.exports = (app) => {
     const adminLog = require('../controllers/adminLogController');
 
+// All the api calls that the admin want to call regarding the logs. 
+
 app.route('/adminLog/:doorName/:maxEntries')
     .get(adminLog.FindEntriesByDoor)
 

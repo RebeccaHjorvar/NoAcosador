@@ -1,6 +1,8 @@
 const mongoose = require('mongoose'),
-AdminLog = mongoose.model('AdminLog');
-Utils = require('../Utils')
+AdminLog = mongoose.model('AdminLog'),
+Utils = require('../Utils');
+
+// Handels the api calls from the Admin regarding the logs. 
 
 exports.FindEntriesByDoor = (req, res) => {
     AdminLog.door.find({ doorName: req.params.doorName }, (err, adminLog) => {
@@ -23,7 +25,7 @@ exports.FindEntriesByEvent = (req, res) => {
     }
     else if(req.params.event === "DÖUT")
     {
-        AdminLog.event.find({ ut: true }, (err, adminLog) => {
+        AdminLog.event.find({ out: true }, (err, adminLog) => {
             if(err)
             res.send(err);
         res.json(adminLog);
@@ -52,7 +54,7 @@ exports.FindEntriesByLocation = (req, res) => {
 exports.FindEntriesByTag = (req, res) => {
     if(req.params.maxEntries === null)
         req.params.maxEntries = 20;
-    AdminLog.tag.find({ tagNumber: req.params.tagNumber }, (err, adminLog) => {
+    AdminLog.event.tag.find({ tagNumber: req.params.tagNumber }, (err, adminLog) => {
         if(err)
         res.send(err);
     res.json(adminLog);
@@ -62,7 +64,7 @@ exports.FindEntriesByTag = (req, res) => {
 exports.FindEntriesByTenant = (req, res) => {
     if(req.params.maxEntries === null)
         req.params.maxEntries = 20;
-    AdminLog.tenant.find({ name: req.params.tenantName }, (err, adminLog) => {
+    AdminLog.event.tag.tenant.find({ name: req.params.tenantName }, (err, adminLog) => {
         if(err)
         res.send(err);
     res.json(adminLog);
@@ -72,7 +74,7 @@ exports.FindEntriesByTenant = (req, res) => {
 exports.ListTenantsAt = (req, res) => {
     if(req.params.maxEntries === null)
         req.params.maxEntries = 20;
-    AdminLog.tenant.find({ appartment: req.params.appartment }, (err, adminLog) => {
+    AdminLog.event.tag.tenant.find({ appartment: req.params.appartment }, (err, adminLog) => {
         if(err)
         res.send(err);
     res.json(adminLog.tenant);

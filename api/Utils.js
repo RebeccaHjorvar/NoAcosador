@@ -1,52 +1,46 @@
 const mongoose = require('mongoose')
 
 exports.mapAdminLog = (date, appartment, eventName, tagNumber) => {
-    let paramDate = date;
+    let paramDate = new Date(date);
     let DÖIN = false;
     let DÖUT = false;
-    let Error = "";
+    let theError = "";
 
     if(eventName === "DÖIN")
     {
         DÖIN = true;
         DÖUT = false;
-        Error = "";
+        theError = "";
     }
     if(eventName === "DÖUT")
     {
         DÖIN = false;
         DÖUT = true;
-        Error = "";
+        theError = "";
     }
     else
     {
         DÖIN = false;
         DÖUT = false;
-        Error = `${eventName}`;
+        theError = `${eventName}`;
     }
 
     let theTag = mongoose.model('Tag')
-        .findOne({ tagNumber: `${tagNumber}` });
+    .findOne({ tagNumber: `${tagNumber}` })
 
+    //The question is falsly writen. This makes more scense. 
     let theDoor = mongoose.model('Door')
         .findOne({ location: `${appartment}` })
 
-    let theTenant = mongoose.model('Tenant')
-        .findOne({ tag: theTag });
-
-    let theEvent = new Event({
-        date: paramDate,
-        in: DÖIN,
-        ut: DÖUT,
-        error: Error,
-        tag: theTag
-    });
-
     let new_entry = new AdminLog({
         door: theDoor,
-        tag: theTag,
-        tenant: theTenant,
-        event: theEvent
+        event: new Event({
+            date: paramDate,
+            in: DÖIN,
+            ut: DÖUT,
+            error: `${theError}`,
+            tag: theTag
+        })
     });
 
     return new_entry;
