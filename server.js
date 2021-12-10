@@ -30,14 +30,12 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 
 // Import Routes
-const tenantRoute = require('./api/routes/tenantRoutes')
-const tagRoute = require('./api/routes/tagRoutes')
-const doorRoute = require('./api/routes/doorRoutes')
+const routes = require('./routes')
+
 
 // Register routes
-tenantRoute(app);
-tagRoute(app);
-doorRoute(app);
+routes(app);
+
 
 app.get('*', (req, res)=>{
     res.status(404).send({url: req.originalUrl + ' not found'})
