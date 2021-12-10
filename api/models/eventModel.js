@@ -8,7 +8,11 @@ const eventSchema = new mongoose.Schema({
     tag: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Tag'
+    }],
+    door: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Door'
     }]
 })
 
-module.exports = mongoose.model("event", eventSchema)
+module.exports = mongoose.model("Event", eventSchema);
