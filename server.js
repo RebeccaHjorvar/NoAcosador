@@ -7,12 +7,13 @@ const port = process.env.PORT || '3000';
 Tenant = require('./api/models/tenantModel')
 Tag = require('./api/models/tagModel')
 Door = require('./api/models/doorModel')
+Events = require('./api/models/eventModel') // Event is a default so named it Events
 
 AdminLog = require('./api/models/adminLogModel')
 
 //db url
 const username = 'user', password = '1234', cluster = 'noacosador.sszic', dbname = 'NoAcosador';
-const uri = `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}`
+const uri = `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}`;
 
 // moongose connection
 mongoose
@@ -28,13 +29,14 @@ mongoose
         console.log(Error, err.message);
 });
 
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Import Routes
-const tenantRoute = require('./api/routes/tenantRoutes')
-const tagRoute = require('./api/routes/tagRoutes')
-const doorRoute = require('./api/routes/doorRoutes')
+const tenantRoute = require('./api/routes/tenantRoutes');
+const tagRoute = require('./api/routes/tagRoutes');
+const doorRoute = require('./api/routes/doorRoutes');
+const eventRoute = require('./api/routes/eventRoutes');
 
 const adminLogRoute = require('./api/routes/adminLogRoutes')
 
@@ -42,12 +44,13 @@ const adminLogRoute = require('./api/routes/adminLogRoutes')
 tenantRoute(app);
 tagRoute(app);
 doorRoute(app);
+eventRoute(app);
 
 adminLogRoute(app);
 
 app.get('*', (req, res)=>{
     res.status(404).send({url: req.originalUrl + ' not found'})
-    })
+});
 
 app.listen(port);
 console.log('mucho bueno RESTful API server started on: ' + port);
