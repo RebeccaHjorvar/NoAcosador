@@ -8,6 +8,8 @@ Tenant = require('./api/models/tenantModel')
 Tag = require('./api/models/tagModel')
 Door = require('./api/models/doorModel')
 
+AdminLog = require('./api/models/adminLogModel')
+
 //db url
 const username = 'user', password = '1234', cluster = 'noacosador.sszic', dbname = 'NoAcosador';
 const uri = `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}`
@@ -34,10 +36,14 @@ const tenantRoute = require('./api/routes/tenantRoutes')
 const tagRoute = require('./api/routes/tagRoutes')
 const doorRoute = require('./api/routes/doorRoutes')
 
+const adminLogRoute = require('./api/routes/adminLogRoutes')
+
 // Register routes
 tenantRoute(app);
 tagRoute(app);
 doorRoute(app);
+
+adminLogRoute(app);
 
 app.get('*', (req, res)=>{
     res.status(404).send({url: req.originalUrl + ' not found'})
