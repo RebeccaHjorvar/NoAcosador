@@ -1,6 +1,6 @@
 module.exports = (app) => {
     const tag = require('../controllers/tagController');
-
+// the routes for a  tag
 app.route('/tag')
     .get(tag.list_all_tags)
     .post(tag.create_a_tag);
