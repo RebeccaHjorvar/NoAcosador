@@ -12,11 +12,25 @@ exports.create_an_event = (req, res) => {
     {
         new_event.date = Date.now();
     }
-    new_event.save((err, event) => {
-        if (err)
-            res.send(`error: ${err}`);
-        res.json(event);
-    });
+    if(new_event.tag.access.includes(new_event.door.ObjectId))
+    {
+        new_event.save((err, event) => {
+            if (err)
+                res.send(`error: ${err}`);
+            res.json(event);
+        });
+    }
+    else
+    {
+        new_event.in = false;
+        new_event.out = false;
+        new_event.error = 'Unauthorized'
+        new_event.save((err, event) => {
+            if (err)
+                res.send(`error: ${err}`);
+            res.json(event);
+        });
+    }
 };
 
 // Get all events
