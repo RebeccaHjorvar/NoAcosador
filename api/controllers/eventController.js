@@ -63,7 +63,7 @@ exports.FindEntriesByDoor = (req, res) => {
     {
         maxE = 20;
     }
-    let door = Door.find( {'door.doorName': `${req.params.doorName}` } );
+    let door = Door.find( {'door.doorName': req.params.doorName } );
     Events.find( {'door': door.ObjectId} , (err, event) => {
         if(err)
         res.send(err);
@@ -109,7 +109,7 @@ exports.FindEntriesByLocation = (req, res) => {
     {
         maxE = 20;
     }
-    let door = Door.find( {'door.location': `${req.params.location}` } );
+    let door = Door.find( {'door.location': req.params.location } );
     Events.find( {'door': door.ObjectId} , (err, event) => {
         if(err)
         res.send(err);
@@ -123,7 +123,7 @@ exports.FindEntriesByTag = (req, res) => {
     {
         maxE = 20;
     }
-    let tag = Tag.find( {'tag.tagNumber': `${req.params.tagNumber}` } );
+    let tag = Tag.find( {'tag.tagNumber': req.params.tagNumber } );
     Events.find( {'tag': tag.ObjectId} , (err, event) => {
         if(err)
         res.send(err);
@@ -137,7 +137,7 @@ exports.FindEntriesByTenant = (req, res) => {
     {
         maxE = 20;
     }
-    let tenant = Tenant.findOne( {'tenantName': `${req.params.tenantName}` } );
+    let tenant = Tenant.findOne( {'tenantName': req.params.tenantName } );
     let tag = Tag.findOne({'tenant': tenant.ObjectId});
     Events.find( {'tag': tag.ObjectId} , (err, event) => {
         if(err)
@@ -152,7 +152,7 @@ exports.ListTenantsAt = (req, res) => {
     {
         maxE = 20;
     }
-    Tenant.find( {'appartment': `${req.params.appartment}` } , (err, event) => {
+    Tenant.find( {'appartment': req.params.appartment } , (err, event) => {
         if(err)
         res.send(err);
     res.json(event.tenant);
