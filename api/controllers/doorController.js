@@ -68,5 +68,7 @@ exports.getEventsOnDoor = (req, res) => {
 
     // findById så fattar moongose vad du söker efter så första parametern är id
 
+    // sortera events på dörr så att senaste kommer högst upp i listan
+
 
 }
