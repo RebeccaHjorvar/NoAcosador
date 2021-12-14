@@ -38,7 +38,13 @@ routes(app);
 
 
 app.get('*', (req, res)=>{
-    res.status(404).send({url: req.originalUrl + ' not found'})
+    res.status(404).send({url: req.originalUrl + ' not found. Try our functioning routes instead!'
++ '/tenant' 
++ '/door'
++ '/event'
++ '/tag'
+
+})
     })
 
 app.listen(port);
