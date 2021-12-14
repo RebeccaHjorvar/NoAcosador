@@ -73,9 +73,10 @@ exports.delete_an_event = (req, res) => {
 
 exports.FindEntriesByDoor = (req, res) => { 
     let maxE = parseInt(req.params.maxEntries);
-    if(maxE === 0)
+    
+    if(isNaN(req.params.maxEntries))
     {
-        maxE = 20;
+       maxE = 20; 
     }
     let door = Door.find( {'door.doorName': req.params.doorName } );
     Events.find( {'door': door.ObjectId} , (err, event) => {
@@ -87,9 +88,10 @@ exports.FindEntriesByDoor = (req, res) => {
 
 exports.FindEntriesByEvent = (req, res) => {
     let maxE = parseInt(req.params.maxEntries);
-    if(maxE === 0)
+    
+    if(isNaN(req.params.maxEntries))
     {
-        maxE = 20;
+       maxE = 20; 
     }
     else if(req.params.eventName === "IN")
     {
@@ -119,9 +121,10 @@ exports.FindEntriesByEvent = (req, res) => {
 
 exports.FindEntriesByLocation = (req, res) => {
     let maxE = parseInt(req.params.maxEntries);
-    if(maxE === 0)
+    
+    if(isNaN(req.params.maxEntries))
     {
-        maxE = 20;
+       maxE = 20; 
     }
     let door = Door.find( {'door.location': req.params.location } );
     Events.find( {'door': door.ObjectId} , (err, event) => {
@@ -133,9 +136,10 @@ exports.FindEntriesByLocation = (req, res) => {
 
 exports.FindEntriesByTag = (req, res) => {
     let maxE = parseInt(req.params.maxEntries);
-    if(maxE === 0)
+    
+    if(isNaN(req.params.maxEntries))
     {
-        maxE = 20;
+       maxE = 20; 
     }
     let tag = Tag.find( {'tag.tagNumber': req.params.tagNumber } );
     Events.find( {'tag': tag.ObjectId} , (err, event) => {
@@ -147,9 +151,10 @@ exports.FindEntriesByTag = (req, res) => {
 
 exports.FindEntriesByTenant = (req, res) => {
     let maxE = parseInt(req.params.maxEntries);
-    if(maxE === 0)
+    
+    if(isNaN(req.params.maxEntries))
     {
-        maxE = 20;
+       maxE = 20; 
     }
     let tenant = Tenant.findOne( {'tenantName': req.params.tenantName } );
     let tag = Tag.findOne({'tenant': tenant.ObjectId});
@@ -162,9 +167,10 @@ exports.FindEntriesByTenant = (req, res) => {
 
 exports.ListTenantsAt = (req, res) => {
     let maxE = parseInt(req.params.maxEntries);
-    if(maxE === 0)
+    
+    if(isNaN(req.params.maxEntries))
     {
-        maxE = 20;
+       maxE = 20; 
     }
     Tenant.find( {'appartment': req.params.appartment } , (err, event) => {
         if(err)
