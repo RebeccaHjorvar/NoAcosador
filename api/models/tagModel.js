@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const tagSchema = new mongoose.Schema({
     tagNumber: {
-        type: Number,
+        type: String,
         required: true
     },
     tenant: {

@@ -9,5 +9,4 @@ app.route('/tag/:tagId')
     .get(tag.get_a_tag)
     .put(tag.update_a_tag)
     .delete(tag.delete_a_tag);
-
 };

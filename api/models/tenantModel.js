@@ -3,16 +3,12 @@ const mongoose = require('mongoose');
 
 // Tenantschema and model
 const tenantSchema = new mongoose.Schema({
-    firstName: {
+    name: {
         type: String,
-        required: 'Enter first name'
-    },
-    lastName: {
-        type: String,
-        required: 'Enter last name',
+        required: 'Enter a name'
     },
     appartment: {
-        type: Number,
+        type: String,
         required: 'Enter the appartment number'
     },
     tag: {
