@@ -15,6 +15,7 @@ To get it working:
 
 
 Example JSON post:
+
     {
         "event":{
         "_id": "61b85527344f610e88aaf8fd",
@@ -34,11 +35,8 @@ Example JSON post:
             "_id": "61b853bd30c1c243b48e3d6c",
              "doorName": "LGH",
               "location": "Våning"
-        }
-            
-,
+        },
         "__v": 0
     }
-    
 }
     
