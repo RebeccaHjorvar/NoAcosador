@@ -12,22 +12,22 @@ app.route('/event/:eventId')
 
 // All the api calls that the admin want to call regarding the events. 
 
-app.route('/event/doorName/:doorName/:maxEntries')
+app.route('/event/doorName/:doorName/maxEntries/:maxEntries')
     .get(Events.FindEntriesByDoor)
 
-app.route('/event/eventName/:eventName/:maxEntries')
+app.route('/event/eventName/:eventName/maxEntries/:maxEntries')
     .get(Events.FindEntriesByEvent)
 
-app.route('/event/location/:location/:maxEntries')
+app.route('/event/location/:location/maxEntries/:maxEntries')
     .get(Events.FindEntriesByLocation)
 
-app.route('/event/tagNumber/:tagNumber/:maxEntries')
+app.route('/event/tagNumber/:tagNumber/maxEntries/:maxEntries')
     .get(Events.FindEntriesByTag)
 
-app.route('/event/tenantName/:tenantName/:maxEntries')
+app.route('/event/tenantName/:tenantName/maxEntries/:maxEntries')
     .get(Events.FindEntriesByTenant)
 
-app.route('/event/appartment/:appartment/:maxEntries')
+app.route('/event/appartment/:appartment/maxEntries/:maxEntries')
     .get(Events.ListTenantsAt)
 
 app.route('/event/logEntry')

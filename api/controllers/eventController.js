@@ -1,10 +1,17 @@
 const mongoose = require('mongoose'),
-    Events = mongoose.model('Event')
+    Events = mongoose.model('Event'),
+    Door = mongoose.model('Door'),
+    Tag = mongoose.model('Tag'),
+    Tenant = mongoose.model('Tenant')
 
 
 // Create event
 exports.create_an_event = (req, res) => {
     let new_event = new Events(req.body);
+    if(new_event.date === null)
+    {
+        new_event.date = Date.now();
+    }
     new_event.save((err, event) => {
         if (err)
             res.send(`error: ${err}`);
@@ -51,10 +58,13 @@ exports.delete_an_event = (req, res) => {
 // Handels the api calls from the Admin regarding the events. 
 
 exports.FindEntriesByDoor = (req, res) => { 
-    let maxE = req.params.maxEntries;
+    let maxE = parseInt(req.params.maxEntries);
     if(maxE === 0)
+    {
         maxE = 20;
-    Events.find( {'door.doorName': `${req.params.doorName}` }, (err, event) => {
+    }
+    let door = Door.find( {'door.doorName': `${req.params.doorName}` } );
+    Events.find( {'door': door.ObjectId} , (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
@@ -62,9 +72,11 @@ exports.FindEntriesByDoor = (req, res) => {
 };
 
 exports.FindEntriesByEvent = (req, res) => {
-    let maxE = req.params.maxEntries;
+    let maxE = parseInt(req.params.maxEntries);
     if(maxE === 0)
+    {
         maxE = 20;
+    }
     else if(req.params.eventName === "IN")
     {
         Events.find({ in: true }, (err, event) => {
@@ -92,10 +104,13 @@ exports.FindEntriesByEvent = (req, res) => {
 };
 
 exports.FindEntriesByLocation = (req, res) => {
-    let maxE = req.params.maxEntries;
+    let maxE = parseInt(req.params.maxEntries);
     if(maxE === 0)
+    {
         maxE = 20;
-    Events.find({ 'door.location': `${req.params.location}` }, (err, event) => {
+    }
+    let door = Door.find( {'door.location': `${req.params.location}` } );
+    Events.find( {'door': door.ObjectId} , (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
@@ -103,10 +118,13 @@ exports.FindEntriesByLocation = (req, res) => {
 };
 
 exports.FindEntriesByTag = (req, res) => {
-    let maxE = req.params.maxEntries;
+    let maxE = parseInt(req.params.maxEntries);
     if(maxE === 0)
+    {
         maxE = 20;
-    Events.find({ 'tag.tagNumber': `${req.params.tagNumber}` }, (err, event) => {
+    }
+    let tag = Tag.find( {'tag.tagNumber': `${req.params.tagNumber}` } );
+    Events.find( {'tag': tag.ObjectId} , (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
@@ -114,10 +132,14 @@ exports.FindEntriesByTag = (req, res) => {
 };
 
 exports.FindEntriesByTenant = (req, res) => {
-    let maxE = req.params.maxEntries;
+    let maxE = parseInt(req.params.maxEntries);
     if(maxE === 0)
+    {
         maxE = 20;
-    Events.find({ 'tag.tenant.name': `${req.params.tenantName}` }, (err, event) => {
+    }
+    let tenant = Tenant.findOne( {'tenantName': `${req.params.tenantName}` } );
+    let tag = Tag.findOne({'tenant': tenant.ObjectId});
+    Events.find( {'tag': tag.ObjectId} , (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
@@ -125,10 +147,12 @@ exports.FindEntriesByTenant = (req, res) => {
 };
 
 exports.ListTenantsAt = (req, res) => {
-    let maxE = req.params.maxEntries;
+    let maxE = parseInt(req.params.maxEntries);
     if(maxE === 0)
+    {
         maxE = 20;
-    Events.tag.tenant.find({ appartment: req.params.appartment }, (err, event) => {
+    }
+    Tenant.find( {'appartment': `${req.params.appartment}` } , (err, event) => {
         if(err)
         res.send(err);
     res.json(event.tenant);
