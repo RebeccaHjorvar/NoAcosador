@@ -5,14 +5,14 @@ const eventSchema = new mongoose.Schema({
     out: Boolean,
     error: String,
     date: Date,
-    tag: [{
+    tag: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Tag'
-    }],
-    door: [{
+    },
+    door: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Door'
-    }]
+    }
 })
 
 module.exports = mongoose.model("Event", eventSchema);
