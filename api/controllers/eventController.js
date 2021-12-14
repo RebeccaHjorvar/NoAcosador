@@ -50,79 +50,87 @@ exports.delete_an_event = (req, res) => {
 
 // Handels the api calls from the Admin regarding the events. 
 
-exports.FindEntriesByDoor = (req, res) => {
-    Events.door.find({ doorName: req.params.doorName }, (err, event) => {
+exports.FindEntriesByDoor = (req, res) => { 
+    let maxE = req.params.maxEntries;
+    if(maxE === 0)
+        maxE = 20;
+    Events.find( {'door.doorName': `${req.params.doorName}` }, (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
-    }).limit(req.params.maxEntries)
+    }).limit(maxE)
 };
 
 exports.FindEntriesByEvent = (req, res) => {
-    if(req.params.maxEntries === null)
-        req.params.maxEntries = 20;
-    else if(req.params.event === "DÖIN")
+    let maxE = req.params.maxEntries;
+    if(maxE === 0)
+        maxE = 20;
+    else if(req.params.eventName === "IN")
     {
         Events.find({ in: true }, (err, event) => {
             if(err)
             res.send(err);
         res.json(event);
-        }).limit(req.params.maxEntries)
+        }).limit(maxE)
     }
-    else if(req.params.event === "DÖUT")
+    else if(req.params.eventName === "UT")
     {
         Events.find({ out: true }, (err, event) => {
             if(err)
             res.send(err);
         res.json(event);
-        }).limit(req.params.maxEntries)
+        }).limit(maxE)
     }
-    else if(req.params.event === "ERROR")
+    else if(req.params.eventName === "ERROR")
     {
         Events.find({ error: "Unauthorized" }, (err, event) => {
             if(err)
             res.send(err);
         res.json(event);
-        }).limit(req.params.maxEntries)
+        }).limit(maxE)
     }
 };
 
 exports.FindEntriesByLocation = (req, res) => {
-    if(req.params.maxEntries === null)
-        req.params.maxEntries = 20;
-    Events.door.find({ location: req.params.location }, (err, event) => {
+    let maxE = req.params.maxEntries;
+    if(maxE === 0)
+        maxE = 20;
+    Events.find({ 'door.location': `${req.params.location}` }, (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
-    }).limit(req.params.maxEntries)
+    }).limit(maxE)
 };
 
 exports.FindEntriesByTag = (req, res) => {
-    if(req.params.maxEntries === null)
-        req.params.maxEntries = 20;
-    Events.tag.find({ tagNumber: req.params.tagNumber }, (err, event) => {
+    let maxE = req.params.maxEntries;
+    if(maxE === 0)
+        maxE = 20;
+    Events.find({ 'tag.tagNumber': `${req.params.tagNumber}` }, (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
-    }).limit(req.params.maxEntries)
+    }).limit(maxE)
 };
 
 exports.FindEntriesByTenant = (req, res) => {
-    if(req.params.maxEntries === null)
-        req.params.maxEntries = 20;
-    Events.tag.tenant.find({ name: req.params.tenantName }, (err, event) => {
+    let maxE = req.params.maxEntries;
+    if(maxE === 0)
+        maxE = 20;
+    Events.find({ 'tag.tenant.name': `${req.params.tenantName}` }, (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
-    }).limit(req.params.maxEntries)
+    }).limit(maxE)
 };
 
 exports.ListTenantsAt = (req, res) => {
-    if(req.params.maxEntries === null)
-        req.params.maxEntries = 20;
+    let maxE = req.params.maxEntries;
+    if(maxE === 0)
+        maxE = 20;
     Events.tag.tenant.find({ appartment: req.params.appartment }, (err, event) => {
         if(err)
         res.send(err);
     res.json(event.tenant);
-    }).limit(req.params.maxEntries)
+    }).limit(maxE)
 };
