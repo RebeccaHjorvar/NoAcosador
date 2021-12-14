@@ -44,3 +44,26 @@ exports.deleteDoor = (req, res) => {
     res.json({message: 'Door was successfully deleted!'})
     })
 }
+
+exports.getEventsOnDoor = (req, res) => {
+    // Finds door by id, specifies what we want to see in door.(events)
+    // TODO - create a route and create events on doors
+    Door.findById(req.params.doorId, 'events', (err, doorEvents) => {
+        if(err)
+            res.send(err)
+        res.json(doorEvents)
+    });
+    // hitta dörren
+
+    // gå in i events i dörren
+
+    // lista upp de 20 senaste events som har hänt dörren
+
+    //get list of events on doorID
+
+    // find one var specific vad du söker
+
+    // findById så fattar moongose vad du söker efter så första parametern är id
+
+
+}
