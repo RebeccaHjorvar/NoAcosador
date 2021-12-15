@@ -12,7 +12,8 @@ exports.create_an_event = (req, res) => {
     {
         new_event.date = Date.now();
     }
-    if(new_event.tag.access.includes(new_event.door.ObjectId))
+    console.log(req.body);
+    if(new_event.tag.access.includes(new_event.Door.doorName))
     {
         new_event.save((err, event) => {
             if (err)

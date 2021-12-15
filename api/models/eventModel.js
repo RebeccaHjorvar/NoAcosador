@@ -9,7 +9,12 @@ const eventSchema = new mongoose.Schema({
         tagNumber: {
             type: String,
             required: true
-        }, 
+        },
+        access: [{
+            doorName: {
+                type: String,
+            }
+        }],
         tenant: {
             name:{
                 type: String,
