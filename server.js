@@ -44,8 +44,12 @@ doorRoute(app);
 eventRoute(app);
 
 app.get('*', (req, res)=>{
-    res.status(404).send({url: req.originalUrl + ' not found'})
+    res.status(404).send({url: req.originalUrl + ' not found. Try our functioning routes instead!'
++ '/tenant ' 
++ '/door '
++ '/event '
++ '/tag '
+})
 });
-
 app.listen(port);
 console.log('mucho bueno RESTful API server started on: ' + port);

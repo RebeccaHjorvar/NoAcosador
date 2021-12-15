@@ -6,7 +6,7 @@ app.route('/tag')
     .post(tag.create_a_tag);
 
 app.route('/tag/:tagId')
-    .get(tag.get_a_tag)
+    .get(tag.look_up_tag)
     .put(tag.update_a_tag)
     .delete(tag.delete_a_tag);
 };

@@ -1,10 +1,11 @@
 const mongoose = require('mongoose'),
-    Tenant = mongoose.model('Tag');
+    Tag = mongoose.model('Tag'),
+    Tenant = mongoose.model('Tenant');
 
 
     // lits all tags to show
 exports.list_all_tags = (req, res) => {
-    Tenant.find({}, (err, tag) => {
+    Tag.find({}, (err, tag) => {
       if (err)
         res.send(err);
       res.json(tag);
@@ -32,7 +33,7 @@ exports.list_all_tags = (req, res) => {
 
   // updates a tag with new information
   exports.update_a_tag = (req, res) => {
-    Tenant.findOneAndUpdate({_id: req.params.tagId}, req.body, {new: true}, (err, task) => {
+    Tag.findOneAndUpdate({_id: req.params.tagId}, req.body, {new: true}, (err, task) => {
        if (err)
          res.send(err);
        res.json(tag);
@@ -41,7 +42,7 @@ exports.list_all_tags = (req, res) => {
 
    // remove a tag
    exports.delete_a_tag = (req, res) => {
-    Tenant.remove({
+    Tag.remove({
       _id: req.params.tagId
     }, (err, tag) => {
       if (err)
@@ -49,3 +50,22 @@ exports.list_all_tags = (req, res) => {
       res.json({ message: 'Tag successfully deleted' });
     });
   };
+
+exports.look_up_tag = (req, res) => 
+  Tenant.aggregate([{
+    $lookup: {
+      from: "tags",
+      localField: "tagNumber",
+      foreignField: "firstName",
+      as: "tag",
+    }   
+         
+  }], function(err, data) {
+    return res.json(data)
+  })
+
+  
+  
+
+
+
