@@ -9,4 +9,6 @@ app.route('/door/:id')
 .get(door.findDoorById)
 .put(door.updateDoor)
 .delete(door.deleteDoor)
+
 };
+

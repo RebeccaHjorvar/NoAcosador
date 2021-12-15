@@ -46,18 +46,15 @@ exports.deleteDoor = (req, res) => {
 }
 
 exports.getEventsOnDoor = (req, res) => {
-
-    // hitta dörren
-    Door.findDoorById(req.params.doorId, (err, door) => {
+    // Finds door by id, specifies what we want to see in door.(events)
+    // TODO - create a route and create events on doors
+    Door.findById(req.params.doorId, 'events', (err, doorEvents) => {
         if(err)
-        {
-            res.send(err);
-        }
-        else 
-        {
-            res.json(door.events);
-        }
+            res.send(err)
+        res.json(doorEvents)
     });
+    // hitta dörren
+
     // gå in i events i dörren
 
     // lista upp de 20 senaste events som har hänt dörren
@@ -67,6 +64,8 @@ exports.getEventsOnDoor = (req, res) => {
     // find one var specific vad du söker
 
     // findById så fattar moongose vad du söker efter så första parametern är id
+
+    // sortera events på dörr så att senaste kommer högst upp i listan
 
 
 }

@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (app) => {
     const tenant = require('../controllers/tenantController');
-
+// the routs for an tenant
 app.route('/tenant')
     .get(tenant.list_all_tenants)
     .post(tenant.create_a_tenant);

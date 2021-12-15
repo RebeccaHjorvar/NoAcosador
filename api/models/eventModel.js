@@ -1,28 +1,32 @@
-const mongoose = require("mongoose")
-const { boolean } = require("webidl-conversions")
+const mongoose = require('mongoose')
 
-
-const eventSchema = mongoose.Schema({
-    in: 
-    {
-        type: Boolean
-    },
-    out: 
-    {
-        type: Boolean
-    },
-    error: 
-    {
-        type: String
-    },
-    date: 
-    {
-        type: Date
-    },
+const eventSchema = new mongoose.Schema({
+    in: Boolean,
+    out: Boolean,
+    error: String,
+    date: Date,
     tag: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Tag'
+        tagNumber: {
+            type: String,
+            required: true
+        }, 
+        tenant: {
+            name:{
+                type: String,
+            },
+            appartment: {
+                type: String,
+            }
+        }
+    },
+    door: {
+        doorName: {
+            type: String,
+        },
+        location: {
+            type: String
+        }
     }
 })
 
-module.exports = mongoose.model("Event", eventSchema)
+module.exports = mongoose.model("Event", eventSchema);

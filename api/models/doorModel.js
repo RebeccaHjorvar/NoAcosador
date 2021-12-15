@@ -9,8 +9,18 @@ const doorschema = mongoose.Schema({
         type: String
     },
     events: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Event',
+        in: {
+            type: Boolean
+        },
+        out: {
+            type: Boolean
+        }, 
+        error:{
+            type: Boolean
+        },
+        date: {
+            type: Date
+        }
     }]
 })
 
