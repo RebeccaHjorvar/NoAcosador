@@ -8,12 +8,14 @@ const tagSchema = new mongoose.Schema({
         required: true
     },
     tenant: {
-        type: mongoose.Types.ObjectId,
-        ref: 'Tenant',
+        name: {
+            type: String,
+        }
     },
     access: [{
-        type: mongoose.Types.ObjectId,
-        ref: 'Door'
+        doorName: {
+            type: String,
+        }
     }]
 });
 
