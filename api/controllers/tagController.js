@@ -33,7 +33,7 @@ exports.list_all_tags = (req, res) => {
 
   // updates a tag with new information
   exports.update_a_tag = (req, res) => {
-    Tag.findOneAndUpdate({_id: req.params.tagId}, req.body, {new: true}, (err, task) => {
+    Tag.findOneAndUpdate({_id: req.params.tagId}, req.body, {new: true}, (err, tag) => {
        if (err)
          res.send(err);
        res.json(tag);
