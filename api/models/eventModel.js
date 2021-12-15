@@ -6,12 +6,26 @@ const eventSchema = new mongoose.Schema({
     error: String,
     date: Date,
     tag: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Tag'
+        tagNumber: {
+            type: String,
+            required: true
+        }, 
+        tenant: {
+            name:{
+                type: String,
+            },
+            appartment: {
+                type: String,
+            }
+        }
     },
     door: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Door'
+        doorName: {
+            type: String,
+        },
+        location: {
+            type: String
+        }
     }
 })
 
