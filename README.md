@@ -16,7 +16,7 @@ To get it working:
 
 Example JSON post:
 
-    {
+   {
         "event":{
         "_id": "61b85527344f610e88aaf8fd",
         "in": true,
@@ -24,11 +24,16 @@ Example JSON post:
         "tag": {
             "_id": "61b849e91bf66c50fcd987f7",
             "tagNumber": "0101A",
+            "access" : [
+            {
+                "_id" : "61b853bd30c1c243b48e3d6c",
+                "doorName" : "LGH"
+            }],
             "tenant": 
             {
                 "_id": "61b850231bf66c50fcd988a0",
                  "name": "Liam Jönsson",
-                     "appartment": "0101"
+                 "appartment": "0101"
             }
         },
         "door": {
@@ -37,6 +42,8 @@ Example JSON post:
               "location": "Våning"
         },
         "__v": 0
+        
+        }
     }
 
     
