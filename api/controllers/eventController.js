@@ -8,11 +8,15 @@ const mongoose = require('mongoose'),
 // Create event
 exports.create_an_event = (req, res) => {
     let new_event = new Events(req.body);
-    if(new_event.date === null)
-    {
-        new_event.date = Date.now();
-    }
-    if(new_event.tag.access.includes(new_event.door.ObjectId))
+    new_event.in = req.body.event.in;
+    new_event.out = req.body.event.out;
+    new_event.door = req.body.event.door;
+    new_event.tag = req.body.event.tag;
+    new_event.tenant = req.body.event.tag.tenant;
+    new_event.access = req.body.event.access;
+    new_event.date = Date.now();
+
+    if(new_event.access.includes(new_event.door.ObjectId))
     {
         new_event.save((err, event) => {
             if (err)
@@ -127,11 +131,13 @@ exports.FindEntriesByLocation = (req, res) => {
        maxE = 20; 
     }
     let door = Door.find( {'door.location': req.params.location } );
+    
     Events.find( {'door': door.ObjectId} , (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
     }).limit(maxE)
+    
 };
 
 exports.FindEntriesByTag = (req, res) => {
