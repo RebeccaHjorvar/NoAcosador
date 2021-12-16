@@ -103,7 +103,7 @@ exports.FindEntriesByEvent = (req, res) => {
     {
        maxE = 20; 
     }
-    else if(req.params.eventName === "IN")
+    else if(req.params.eventName === "DÖIN")
     {
         Events.find({ in: true }, (err, event) => {
             if(err)
@@ -111,7 +111,7 @@ exports.FindEntriesByEvent = (req, res) => {
         res.json(event);
         }).limit(maxE)
     }
-    else if(req.params.eventName === "UT")
+    else if(req.params.eventName === "DÖUT")
     {
         Events.find({ out: true }, (err, event) => {
             if(err)
@@ -119,7 +119,7 @@ exports.FindEntriesByEvent = (req, res) => {
         res.json(event);
         }).limit(maxE)
     }
-    else if(req.params.eventName === "ERROR")
+    else if(req.params.eventName === "Unauthorized")
     {
         Events.find({ error: "Unauthorized" }, (err, event) => {
             if(err)
