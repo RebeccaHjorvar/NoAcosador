@@ -12,7 +12,7 @@ exports.create_an_event = (req, res) => {
     {
         new_event.date = Date.now();
     }
-    if(new_event.tag.access.includes(new_event.door.ObjectId))
+    if(new_event.tag.access == new_event.door.doorName)
     {
         new_event.save((err, event) => {
             if (err)
@@ -125,11 +125,11 @@ exports.FindEntriesByLocation = (req, res) => {
     {
        maxE = 20; 
     }
-    Events.find( {'door.location': req.params.location} , (err, event) => {
+    Events.find( {'door.location': req.params.location}).populate({path: 'door', select: 'location'}).limit(maxE).exec( (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
-    }).limit(maxE)
+    })
 };
 
 exports.FindEntriesByTag = (req, res) => {
