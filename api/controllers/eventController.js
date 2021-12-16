@@ -125,8 +125,7 @@ exports.FindEntriesByLocation = (req, res) => {
     {
        maxE = 20; 
     }
-    let door = Door.find( {'door.location': req.params.location } );
-    Events.find( {'door': door.ObjectId} , (err, event) => {
+    Events.find( {'door.location': req.params.location} , (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
@@ -154,9 +153,7 @@ exports.FindEntriesByTenant = (req, res) => {
     {
        maxE = 20; 
     }
-    let tenant = Tenant.findOne( {'tenantName': req.params.tenantName } );
-    let tag = Tag.findOne({'tenant': tenant.ObjectId});
-    Events.find( {'tag': tag.ObjectId} , (err, event) => {
+    Events.find( {'tag.tenant.name': req.params.tenantName} , (err, event) => {
         if(err)
         res.send(err);
     res.json(event);

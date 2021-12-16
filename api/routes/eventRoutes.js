@@ -24,7 +24,7 @@ app.route('/event/location/:location/maxEntries/:maxEntries')
 app.route('/event/tagNumber/:tagNumber/maxEntries/:maxEntries')
     .get(Events.FindEntriesByTag)
 
-app.route('/event/tenantName/:tenantName/maxEntries/:maxEntries')
+app.route('/event/tenantName/:name/maxEntries/:maxEntries')
     .get(Events.FindEntriesByTenant)
 
 app.route('/event/appartment/:appartment/maxEntries/:maxEntries')
