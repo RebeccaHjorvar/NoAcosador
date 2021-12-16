@@ -8,16 +8,21 @@ const mongoose = require('mongoose'),
 // Create event
 exports.create_an_event = (req, res) => {
     let new_event = new Events(req.body);
-    new_event.in = req.body.event.in;
-    new_event.out = req.body.event.out;
+    if(req.body.event.error === "DÖIN")
+    {
+        new_event.in = true;
+    }
+    if(req.body.event.error === "DÖUT")
+    {
+        new_event.out = true;
+    }
     new_event.door = req.body.event.door;
     new_event.tag = req.body.event.tag;
     new_event.error = req.body.event.error;
     new_event.tenant = req.body.event.tag.tenant;
     new_event.access = req.body.event.access;
     new_event.date = Date.now();
-
-    if(new_event.access.includes(new_event.door.ObjectId))
+    if(new_event.access.includes(new_event.door.doorName))
     {
         new_event.save((err, event) => {
             if (err)
