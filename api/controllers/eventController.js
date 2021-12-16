@@ -17,7 +17,7 @@ exports.create_an_event = (req, res) => {
     new_event.access = req.body.event.access;
     new_event.date = Date.now();
 
-    if(new_event.access.includes(new_event.door.ObjectId))
+    if(new_event.access.includes(new_event.door.doorName))
     {
         new_event.save((err, event) => {
             if (err)
@@ -158,7 +158,7 @@ exports.FindEntriesByTenant = (req, res) => {
     {
        maxE = 20; 
     }
-    Events.find( {'tag.tenant.name': req.params.tenantName} , (err, event) => {
+    Events.find( {'tag.tenant.name': req.params.name} , (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
