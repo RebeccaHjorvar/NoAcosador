@@ -5,10 +5,10 @@ const eventSchema = new mongoose.Schema({
     out: Boolean,
     error: String,
     date: Date,
+    access: [],
     tag: {
         tagNumber: {
-            type: String,
-            required: true
+            type: String
         }, 
         tenant: {
             name:{
