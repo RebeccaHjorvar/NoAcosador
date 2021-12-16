@@ -141,12 +141,11 @@ exports.FindEntriesByTag = (req, res) => {
     {
        maxE = 20; 
     }
-    let tag = Tag.find( {'tag.tagNumber': req.params.tagNumber } );
-    Events.find( {'tag': tag.ObjectId} , (err, event) => {
+    Events.find({'tag.tagNumber': req.params.tagNumber}).populate({path: 'tag', select: 'tagNumber'}).limit(maxE).exec( (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
-    }).limit(maxE)
+    })
 };
 
 exports.FindEntriesByTenant = (req, res) => {
@@ -165,6 +164,7 @@ exports.FindEntriesByTenant = (req, res) => {
     }).limit(maxE)
 };
 
+//
 exports.ListTenantsAt = (req, res) => {
     let maxE = parseInt(req.params.maxEntries);
     
@@ -172,9 +172,10 @@ exports.ListTenantsAt = (req, res) => {
     {
        maxE = 20; 
     }
-    Tenant.find( {'appartment': req.params.appartment } , (err, event) => {
+    //finds tenant where appartment matches the parameters that was sent in, it then populates the tag path with tag that matches the tenants found
+    Tenant.find( {'appartment': req.params.appartment, }).populate({path: 'tag', select: 'tagNumber'}).limit(maxE).exec(  (err, event) => {
         if(err)
-        res.send(err);
-    res.json(event.tenant);
-    }).limit(maxE)
+        res.send(err);  
+    res.json(event);
+    })
 };
