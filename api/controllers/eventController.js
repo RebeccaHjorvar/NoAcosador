@@ -22,6 +22,7 @@ exports.create_an_event = (req, res) => {
     new_event.tenant = req.body.event.tag.tenant;
     new_event.access = req.body.event.access;
     new_event.date = Date.now();
+
     if(new_event.access.includes(new_event.door.doorName))
     {
         new_event.save((err, event) => {
@@ -88,12 +89,11 @@ exports.FindEntriesByDoor = (req, res) => {
     {
        maxE = 20; 
     }
-    let door = Door.find( {'door.doorName': req.params.doorName } );
-    Events.find( {'door': door.ObjectId} , (err, event) => {
+    Events.find( {'door.doorName': req.params.doorName} ).populate({path: 'door', select: 'doorName'}).limit(maxE).exec( (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
-    }).limit(maxE)
+    })
 };
 
 exports.FindEntriesByEvent = (req, res) => {
@@ -136,14 +136,11 @@ exports.FindEntriesByLocation = (req, res) => {
     {
        maxE = 20; 
     }
-    let door = Door.find( {'door.location': req.params.location } );
-    
-    Events.find( {'door': door.ObjectId} , (err, event) => {
+    Events.find( {'door.location': req.params.location}).populate({path: 'door', select: 'location'}).limit(maxE).exec( (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
-    }).limit(maxE)
-    
+    })
 };
 
 exports.FindEntriesByTag = (req, res) => {
@@ -167,9 +164,7 @@ exports.FindEntriesByTenant = (req, res) => {
     {
        maxE = 20; 
     }
-    let tenant = Tenant.findOne( {'tenantName': req.params.tenantName } );
-    let tag = Tag.findOne({'tenant': tenant.ObjectId});
-    Events.find( {'tag': tag.ObjectId} , (err, event) => {
+    Events.find( {'tag.tenant.name': req.params.name} , (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
@@ -184,7 +179,7 @@ exports.ListTenantsAt = (req, res) => {
     {
        maxE = 20; 
     }
-    //finds tenant where appartment matches the parameters that was sent in, it then populates the tag path with tag that matches the tenants found
+    //finds tenant where appartment matches the parameters that was sent in, it then populates the tag path with tagid + tagnumbers that matches the tenants found
     Tenant.find( {'appartment': req.params.appartment, }).populate({path: 'tag', select: 'tagNumber'}).limit(maxE).exec(  (err, event) => {
         if(err)
         res.send(err);  
