@@ -12,8 +12,9 @@ const tenantSchema = new mongoose.Schema({
         required: 'Enter the appartment number'
     },
     tag: {
-        type: mongoose.Types.ObjectId,
-        ref: 'Tag'
+        tagNumber: {
+            type: String
+        }
     }
 });
 

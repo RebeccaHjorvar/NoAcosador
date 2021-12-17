@@ -28,7 +28,7 @@ exports.list_all_tenants = (req, res) => {
   };
 
   exports.update_a_tenant = (req, res) => {
-    Tenant.findOneAndUpdate({_id: req.params.tenantId}, req.body, {new: true}, (err, task) => {
+    Tenant.findOneAndUpdate({_id: req.params.tenantId}, req.body, {new: true}, (err, tenant) => {
        if (err)
          res.send(err);
        res.json(tenant);
@@ -41,7 +41,7 @@ exports.list_all_tenants = (req, res) => {
     }, (err, tenant) => {
       if (err)
         res.send(err);
-      res.json({ message: 'Tenant successfully deleted' });
+      res.json({ message: `Tenant ${tenant} has successfully been deleted` });
     });
   };
 
