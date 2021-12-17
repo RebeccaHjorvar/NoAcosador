@@ -8,11 +8,11 @@ const mongoose = require('mongoose'),
 // Create event
 exports.create_an_event = (req, res) => {
     let new_event = new Events(req.body);
-    if(req.body.event.error === "DÖIN")
+    if(req.body.event.in === true)
     {
         new_event.in = true;
     }
-    if(req.body.event.error === "DÖUT")
+    if(req.body.event.in === true)
     {
         new_event.out = true;
     }
