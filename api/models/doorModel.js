@@ -7,21 +7,7 @@ const doorschema = mongoose.Schema({
     },
     location: {
         type: String
-    },
-    events: [{
-        in: {
-            type: Boolean
-        },
-        out: {
-            type: Boolean
-        }, 
-        error:{
-            type: Boolean
-        },
-        date: {
-            type: Date
-        }
-    }]
+    }
 })
 
 module.exports = mongoose.model("Door", doorschema)
