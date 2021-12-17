@@ -30,7 +30,7 @@ exports.findDoorById = (req, res) => {
 }
 
 exports.updateDoor = (req, res) => {
-    Door.findByIdAndUpdate({id: req.params.id}, req.body, {new: true}, (err, door) => {
+    Door.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, (err, door) => {
         if (err)
         res.send(err);
     res.json(door);
