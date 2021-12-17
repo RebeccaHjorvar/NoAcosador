@@ -13,9 +13,9 @@ const tagSchema = new mongoose.Schema({
         }
     },
     access: [{
-        doorName: {
+        
             type: String,
-        }
+        
     }]
 });
 
