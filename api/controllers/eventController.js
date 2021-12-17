@@ -18,7 +18,6 @@ exports.create_an_event = (req, res) => {
     }
     new_event.door = req.body.event.door;
     new_event.tag = req.body.event.tag;
-    new_event.error = req.body.event.error;
     new_event.tenant = req.body.event.tag.tenant;
     new_event.access = req.body.event.access;
     new_event.date = Date.now();
