@@ -12,12 +12,18 @@ exports.create_an_event = (req, res) => {
     {
         new_event.in = true;
     }
-    if(req.body.event.in === true)
+    if(req.body.event.out === true)
     {
         new_event.out = true;
     }
+    if(req.body.event.in === true && req.body.event.out === true)
+    {
+        new_event.in = false;
+        new_event.out = false;
+    }
     new_event.door = req.body.event.door;
     new_event.tag = req.body.event.tag;
+    new_event.code = req.body.event.code;
     new_event.tenant = req.body.event.tag.tenant;
     new_event.access = req.body.event.access;
     new_event.date = Date.now();
@@ -34,7 +40,7 @@ exports.create_an_event = (req, res) => {
     {
         new_event.in = false;
         new_event.out = false;
-        new_event.error = 'Unauthorized'
+        new_event.code = 'Unauthorized'
         new_event.save((err, event) => {
             if (err)
                 res.send(`error: ${err}`);
@@ -120,7 +126,7 @@ exports.FindEntriesByEvent = (req, res) => {
     }
     else if(req.params.eventName === "Unauthorized")
     {
-        Events.find({ error: "Unauthorized" }, (err, event) => {
+        Events.find({ code: "Unauthorized" }, (err, event) => {
             if(err)
             res.send(err);
         res.json(event);
