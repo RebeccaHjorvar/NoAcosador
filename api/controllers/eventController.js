@@ -12,9 +12,14 @@ exports.create_an_event = (req, res) => {
     {
         new_event.in = true;
     }
-    if(req.body.event.in === true)
+    if(req.body.event.out === true)
     {
         new_event.out = true;
+    }
+    if(req.body.event.in === true && req.body.event.out === true)
+    {
+        new_event.in = false;
+        new_event.out = false;
     }
     new_event.door = req.body.event.door;
     new_event.tag = req.body.event.tag;
