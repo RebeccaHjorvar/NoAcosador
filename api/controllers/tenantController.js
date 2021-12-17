@@ -41,7 +41,7 @@ exports.list_all_tenants = (req, res) => {
     }, (err, tenant) => {
       if (err)
         res.send(err);
-      res.json({ message: 'Tenant successfully deleted' });
+      res.json({ message: `Tenant ${tenant} has successfully been deleted` });
     });
   };
 

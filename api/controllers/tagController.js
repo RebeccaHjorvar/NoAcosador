@@ -47,22 +47,10 @@ exports.list_all_tags = (req, res) => {
     }, (err, tag) => {
       if (err)
         res.send(err);
-      res.json({ message: 'Tag successfully deleted' });
+      res.json({ message: `Tag ${tag} has successfully been deleted` });
     });
   };
 
-exports.look_up_tag = (req, res) => 
-  Tenant.aggregate([{
-    $lookup: {
-      from: "tags",
-      localField: "tagNumber",
-      foreignField: "firstName",
-      as: "tag",
-    }   
-         
-  }], function(err, data) {
-    return res.json(data)
-  })
 
   
   

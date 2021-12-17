@@ -30,7 +30,7 @@ exports.findDoorById = (req, res) => {
 }
 
 exports.updateDoor = (req, res) => {
-    Door.findByIdAndUpdate({id: req.params.id}, req.body, {new: true}, (err, task) => {
+    Door.findByIdAndUpdate({id: req.params.id}, req.body, {new: true}, (err, door) => {
         if (err)
         res.send(err);
     res.json(door);
@@ -41,7 +41,7 @@ exports.deleteDoor = (req, res) => {
     Door.remove({_id: req.params.id}, (err, door) => {
         if(err)
         res.send(err);
-    res.json({message: 'Door was successfully deleted!'})
+    res.json({message: `Door ${door} was successfully deleted!}`})
     })
 }
 
