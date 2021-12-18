@@ -13,7 +13,9 @@ const tagSchema = new mongoose.Schema({
         }
     },
     access: [{
-        type: String
+        
+            type: String,
+        
     }]
 });
 
