@@ -94,7 +94,7 @@ exports.FindEntriesByDoor = (req, res) => {
     {
        maxE = 20; 
     }
-    Events.find( {'door.doorName': req.params.doorName} ).populate({path: 'door', select: 'doorName'}).limit(maxE).exec( (err, event) => {
+    Events.find( {'door.doorName': req.params.doorName} ).sort({date: 'desc'}).populate({path: 'door', select: 'doorName'}).limit(maxE).exec( (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
@@ -141,7 +141,7 @@ exports.FindEntriesByLocation = (req, res) => {
     {
        maxE = 20; 
     }
-    Events.find( {'door.location': req.params.location}).populate({path: 'door', select: 'location'}).limit(maxE).exec( (err, event) => {
+    Events.find( {'door.location': req.params.location}).sort({date: 'desc'}).populate({path: 'door', select: 'location'}).limit(maxE).exec( (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
@@ -155,7 +155,7 @@ exports.FindEntriesByTag = (req, res) => {
     {
        maxE = 20; 
     }
-    Events.find({'tag.tagNumber': req.params.tagNumber}).populate({path: 'tag', select: 'tagNumber'}).limit(maxE).exec( (err, event) => {
+    Events.find({'tag.tagNumber': req.params.tagNumber}).sort({date: 'desc'}).populate({path: 'tag', select: 'tagNumber'}).limit(maxE).exec( (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
@@ -173,7 +173,7 @@ exports.FindEntriesByTenant = (req, res) => {
         if(err)
         res.send(err);
     res.json(event);
-    }).limit(maxE)
+    }).limit(maxE).sort({date: 'desc'})
 };
 
 //
