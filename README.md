@@ -21,7 +21,9 @@ Example JSON post:
          "event":{
         "_id": "61b85527344f610e88aaf8fd",
         "in": true,
+        "out": false,
         "date": null,
+        "access": [ "61b853bd30c1c243b48e3d6c"],
         "tag": {
             "_id": "61b849e91bf66c50fcd987f7",
             "tagNumber": "0101A",

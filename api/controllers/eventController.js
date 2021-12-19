@@ -8,11 +8,27 @@ const mongoose = require('mongoose'),
 // Create event
 exports.create_an_event = (req, res) => {
     let new_event = new Events(req.body);
-    if(new_event.date === null)
+    if(req.body.event.in === true)
     {
-        new_event.date = Date.now();
+        new_event.in = true;
     }
-    if(new_event.tag.access.includes(new_event.door.ObjectId))
+    if(req.body.event.out === true)
+    {
+        new_event.out = true;
+    }
+    if(req.body.event.in === true && req.body.event.out === true)
+    {
+        new_event.in = false;
+        new_event.out = false;
+    }
+    new_event.door = req.body.event.door;
+    new_event.tag = req.body.event.tag;
+    new_event.code = req.body.event.code;
+    new_event.tenant = req.body.event.tag.tenant;
+    new_event.access = req.body.event.access;
+    new_event.date = Date.now();
+
+    if(new_event.access.includes(new_event.door.doorName))
     {
         new_event.save((err, event) => {
             if (err)
@@ -24,7 +40,7 @@ exports.create_an_event = (req, res) => {
     {
         new_event.in = false;
         new_event.out = false;
-        new_event.error = 'Unauthorized'
+        new_event.code = 'Unauthorized'
         new_event.save((err, event) => {
             if (err)
                 res.send(`error: ${err}`);
@@ -78,12 +94,11 @@ exports.FindEntriesByDoor = (req, res) => {
     {
        maxE = 20; 
     }
-    let door = Door.find( {'door.doorName': req.params.doorName } );
-    Events.find( {'door': door.ObjectId} , (err, event) => {
+    Events.find( {'door.doorName': req.params.doorName} ).populate({path: 'door', select: 'doorName'}).limit(maxE).exec( (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
-    }).limit(maxE)
+    })
 };
 
 exports.FindEntriesByEvent = (req, res) => {
@@ -93,7 +108,7 @@ exports.FindEntriesByEvent = (req, res) => {
     {
        maxE = 20; 
     }
-    else if(req.params.eventName === "IN")
+    else if(req.params.eventName === "DÖIN")
     {
         Events.find({ in: true }, (err, event) => {
             if(err)
@@ -101,7 +116,7 @@ exports.FindEntriesByEvent = (req, res) => {
         res.json(event);
         }).limit(maxE)
     }
-    else if(req.params.eventName === "UT")
+    else if(req.params.eventName === "DÖUT")
     {
         Events.find({ out: true }, (err, event) => {
             if(err)
@@ -109,9 +124,9 @@ exports.FindEntriesByEvent = (req, res) => {
         res.json(event);
         }).limit(maxE)
     }
-    else if(req.params.eventName === "ERROR")
+    else if(req.params.eventName === "Unauthorized")
     {
-        Events.find({ error: "Unauthorized" }, (err, event) => {
+        Events.find({ code: "Unauthorized" }, (err, event) => {
             if(err)
             res.send(err);
         res.json(event);
@@ -126,12 +141,11 @@ exports.FindEntriesByLocation = (req, res) => {
     {
        maxE = 20; 
     }
-    let door = Door.find( {'door.location': req.params.location } );
-    Events.find( {'door': door.ObjectId} , (err, event) => {
+    Events.find( {'door.location': req.params.location}).populate({path: 'door', select: 'location'}).limit(maxE).exec( (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
-    }).limit(maxE)
+    })
 };
 
 exports.FindEntriesByTag = (req, res) => {
@@ -141,12 +155,11 @@ exports.FindEntriesByTag = (req, res) => {
     {
        maxE = 20; 
     }
-    let tag = Tag.find( {'tag.tagNumber': req.params.tagNumber } );
-    Events.find( {'tag': tag.ObjectId} , (err, event) => {
+    Events.find({'tag.tagNumber': req.params.tagNumber}).populate({path: 'tag', select: 'tagNumber'}).limit(maxE).exec( (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
-    }).limit(maxE)
+    })
 };
 
 exports.FindEntriesByTenant = (req, res) => {
@@ -156,15 +169,14 @@ exports.FindEntriesByTenant = (req, res) => {
     {
        maxE = 20; 
     }
-    let tenant = Tenant.findOne( {'tenantName': req.params.tenantName } );
-    let tag = Tag.findOne({'tenant': tenant.ObjectId});
-    Events.find( {'tag': tag.ObjectId} , (err, event) => {
+    Events.find( {'tag.tenant.name': req.params.name} , (err, event) => {
         if(err)
         res.send(err);
     res.json(event);
     }).limit(maxE)
 };
 
+//
 exports.ListTenantsAt = (req, res) => {
     let maxE = parseInt(req.params.maxEntries);
     
@@ -172,9 +184,10 @@ exports.ListTenantsAt = (req, res) => {
     {
        maxE = 20; 
     }
-    Tenant.find( {'appartment': req.params.appartment } , (err, event) => {
+    //finds tenant where appartment matches the parameters that was sent in, it then populates the tag path with tagid + tagnumbers that matches the tenants found
+    Tenant.find( {'appartment': req.params.appartment, }).populate({path: 'tag', select: 'tagNumber'}).limit(maxE).exec(  (err, event) => {
         if(err)
-        res.send(err);
-    res.json(event.tenant);
-    }).limit(maxE)
+        res.send(err);  
+    res.json(event);
+    })
 };
